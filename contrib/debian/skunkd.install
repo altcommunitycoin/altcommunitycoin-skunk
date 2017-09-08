@@ -1,0 +1,2 @@
+debian/bin/altcommunitycoind usr/bin
+src/altcommunitycoind usr/lib/altcommunitycoin

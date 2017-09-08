@@ -1,0 +1,14 @@
+obj/crypter.o: crypter.cpp crypter.h allocators.h key.h serialize.h \
+ version.h clientversion.h uint256.h hash.h obj/skunkhash/sph_skein.h \
+ obj/skunkhash/sph_types.h obj/skunkhash/sph_cubehash.h \
+ obj/skunkhash/sph_fugue.h obj/skunkhash/sph_gost.h \
+ obj/skunkhash/raptor.h keystore.h sync.h threadsafety.h script.h \
+ bignum.h util.h tinyformat.h scrypt.h net.h mruset.h netbase.h compat.h \
+ protocol.h chainparams.h addrman.h timedata.h
+crypter.cpp crypter.h allocators.h key.h serialize.h :
+ version.h clientversion.h uint256.h hash.h obj/skunkhash/sph_skein.h :
+ obj/skunkhash/sph_types.h obj/skunkhash/sph_cubehash.h :
+ obj/skunkhash/sph_fugue.h obj/skunkhash/sph_gost.h :
+ obj/skunkhash/raptor.h keystore.h sync.h threadsafety.h script.h :
+ bignum.h util.h tinyformat.h scrypt.h net.h mruset.h netbase.h compat.h :
+ protocol.h chainparams.h addrman.h timedata.h :

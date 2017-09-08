@@ -1,0 +1,16 @@
+obj/chainparams.o: chainparams.cpp chainparams.h bignum.h serialize.h \
+ allocators.h version.h clientversion.h uint256.h util.h tinyformat.h \
+ main.h core.h script.h keystore.h key.h hash.h obj/skunkhash/sph_skein.h \
+ obj/skunkhash/sph_types.h obj/skunkhash/sph_cubehash.h \
+ obj/skunkhash/sph_fugue.h obj/skunkhash/sph_gost.h \
+ obj/skunkhash/raptor.h sync.h threadsafety.h txmempool.h net.h mruset.h \
+ netbase.h compat.h protocol.h addrman.h timedata.h scrypt.h \
+ chainparamsseeds.h
+chainparams.cpp chainparams.h bignum.h serialize.h :
+ allocators.h version.h clientversion.h uint256.h util.h tinyformat.h :
+ main.h core.h script.h keystore.h key.h hash.h obj/skunkhash/sph_skein.h :
+ obj/skunkhash/sph_types.h obj/skunkhash/sph_cubehash.h :
+ obj/skunkhash/sph_fugue.h obj/skunkhash/sph_gost.h :
+ obj/skunkhash/raptor.h sync.h threadsafety.h txmempool.h net.h mruset.h :
+ netbase.h compat.h protocol.h addrman.h timedata.h scrypt.h :
+ chainparamsseeds.h :

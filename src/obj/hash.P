@@ -1,0 +1,8 @@
+obj/hash.o: hash.cpp hash.h uint256.h serialize.h allocators.h version.h \
+ clientversion.h obj/skunkhash/sph_skein.h obj/skunkhash/sph_types.h \
+ obj/skunkhash/sph_cubehash.h obj/skunkhash/sph_fugue.h \
+ obj/skunkhash/sph_gost.h obj/skunkhash/raptor.h
+hash.cpp hash.h uint256.h serialize.h allocators.h version.h :
+ clientversion.h obj/skunkhash/sph_skein.h obj/skunkhash/sph_types.h :
+ obj/skunkhash/sph_cubehash.h obj/skunkhash/sph_fugue.h :
+ obj/skunkhash/sph_gost.h obj/skunkhash/raptor.h :

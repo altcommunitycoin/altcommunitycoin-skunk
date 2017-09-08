@@ -1,0 +1,9 @@
+Building altcommunitycoin
+
+See doc/readme-qt.rst for instructions on building altcommunitycoin QT,
+the intended-for-end-users, nice-graphical-interface, reference
+implementation of altcommunitycoin.
+
+See doc/build-*.txt for instructions on building altcommunitycoind,
+the intended-for-services, no-graphical-interface, reference
+implementation of altcommunitycoin.

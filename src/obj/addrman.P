@@ -1,0 +1,12 @@
+obj/addrman.o: addrman.cpp addrman.h netbase.h serialize.h allocators.h \
+ version.h clientversion.h compat.h protocol.h chainparams.h bignum.h \
+ uint256.h util.h tinyformat.h sync.h threadsafety.h timedata.h hash.h \
+ obj/skunkhash/sph_skein.h obj/skunkhash/sph_types.h \
+ obj/skunkhash/sph_cubehash.h obj/skunkhash/sph_fugue.h \
+ obj/skunkhash/sph_gost.h obj/skunkhash/raptor.h
+addrman.cpp addrman.h netbase.h serialize.h allocators.h :
+ version.h clientversion.h compat.h protocol.h chainparams.h bignum.h :
+ uint256.h util.h tinyformat.h sync.h threadsafety.h timedata.h hash.h :
+ obj/skunkhash/sph_skein.h obj/skunkhash/sph_types.h :
+ obj/skunkhash/sph_cubehash.h obj/skunkhash/sph_fugue.h :
+ obj/skunkhash/sph_gost.h obj/skunkhash/raptor.h :
