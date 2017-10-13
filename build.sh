@@ -28,7 +28,7 @@ if [ ! -e "$file" ]; then
 	# Now assume running outside and repo has been downloaded and named altcommunitycoin
 	if [ ! -e "$repo/altcommunitycoin/build.sh" ]; then
 		# if not, download the repo and name it altcommunitycoin
-		git clone https://github.com/altcommunitycoind/source altcommunitycoin
+		git clone https://github.com/altcommunitycoin/altcommunitycoin-skunk altcommunitycoin
 	fi
 	repo=$repo/altcommunitycoin
 	file=$repo/src/altcommunitycoind

@@ -43,9 +43,16 @@ CBigNum bnProofOfWorkLimit(~uint256(0) >> 4);
 CBigNum bnProofOfStakeLimit(~uint256(0) >> 20);
 CBigNum bnProofOfStakeLimitV2(~uint256(0) >> 48);
 
+// ------V1------
 int nStakeMinConfirmations = 300;
 unsigned int nStakeMinAge = 4 * 60 * 60; // 6 hours
 unsigned int nModifierInterval = 10 * 60; // time to elapse before new modifier is computed
+
+// ------V2------
+int nStakeMinConfirmationsV2 = 1440;
+unsigned int nStakeMinAgeV2 = 24 * 60 * 60;
+
+// --------------
 
 int nCoinbaseMaturity = 50;
 CBlockIndex* pindexGenesisBlock = NULL;
@@ -2986,14 +2993,22 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         CAddress addrFrom;
         uint64_t nNonce = 1;
         vRecv >> pfrom->nVersion >> pfrom->nServices >> nTime >> addrMe;
-        if (pfrom->nVersion < MIN_PEER_PROTO_VERSION)
+         bool badVersion = false;
+          if (pfrom->nVersion < MIN_PEER_PROTO_VERSION)
+           badVersion = true;
+      if (pfrom->nVersion < MIN_PEER_PROTO_VERSION)
+           badVersion = true;
+       if (nBestHeight >= 75000 && pfrom->nVersion < 70001)
+           badVersion = true;
+        	
+       if (badVersion)
+
         {
             // disconnect from peers older than this proto version
-            LogPrintf("partner %s using obsolete version %i; disconnecting\n", pfrom->addr.ToString(), pfrom->nVersion);
+            printf("partner %s using obsolete version %i; disconnecting\n", pfrom->addr.ToString().c_str(), pfrom->nVersion);
             pfrom->fDisconnect = true;
             return false;
         }
-
         if (pfrom->nVersion == 10300)
             pfrom->nVersion = 300;
         if (!vRecv.empty())

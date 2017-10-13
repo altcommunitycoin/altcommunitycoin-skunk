@@ -1132,7 +1132,11 @@ void CWallet::AvailableCoinsForStaking(vector<COutput>& vCoins, unsigned int nSp
             int nDepth = pcoin->GetDepthInMainChain();
             if (nDepth < 1)
                 continue;
-
+            if (nBestHeight >= 75000)
+            {
+                if (nDepth < nStakeMinConfirmationsV2)
+                    continue;
+            }
             if (IsProtocolV3(nSpendTime))
             {
                 if (nDepth < nStakeMinConfirmations)
