@@ -43,6 +43,7 @@
         <file alias="toolbar">res/icons/altcommunitycoin16.png</file>
         <file alias="bitcoin_testnet">res/icons/altcommunitycoin_testnet.png</file>
         <file alias="toolbar_testnet">res/icons/altcommunitycoin_testnet_toolbar.png</file>
+        <file alias="bbrowser">res/icons/bbrowser.png</file>
     </qresource>
     <qresource prefix="/icons/black">
         <file alias="connect_0">res/icons/black/connect0_16.png</file>
@@ -59,6 +60,7 @@
         <file alias="lock_open">res/icons/black/lock_open.png</file>
         <file alias="staking_off">res/icons/black/staking_off.png</file>
         <file alias="staking_on">res/icons/black/staking_on.png</file>
+        <file alias="bbrowser">res/icons/black/bbrowser.png</file>
     </qresource>
     <qresource prefix="/images">
         <file alias="about">res/images/about.png</file>

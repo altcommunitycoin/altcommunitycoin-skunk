@@ -24,6 +24,7 @@
 #include "transactionview.h"
 #include "overviewpage.h"
 #include "bitcoinunits.h"
+#include "blockbrowser.h"
 #include "guiconstants.h"
 #include "askpassphrasedialog.h"
 #include "notificator.h"
@@ -121,12 +122,15 @@ BitcoinGUI::BitcoinGUI(QWidget *parent):
 
     signVerifyMessageDialog = new SignVerifyMessageDialog(this);
 
+    blockBrowser = new BlockBrowser(this);
+
     centralStackedWidget = new QStackedWidget(this);
     centralStackedWidget->addWidget(overviewPage);
     centralStackedWidget->addWidget(transactionsPage);
     centralStackedWidget->addWidget(addressBookPage);
     centralStackedWidget->addWidget(receiveCoinsPage);
     centralStackedWidget->addWidget(sendCoinsPage);
+    centralStackedWidget->addWidget(blockBrowser);
 
     QWidget *centralWidget = new QWidget();
     QVBoxLayout *centralLayout = new QVBoxLayout(centralWidget);
@@ -259,6 +263,12 @@ void BitcoinGUI::createActions()
     addressBookAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_5));
     tabGroup->addAction(addressBookAction);
 
+    blockBrowserAction = new QAction(QIcon(":/icons/bbrowser"), tr("&Block browser"), this);
+    blockBrowserAction->setToolTip(tr("Crawl blocks on the chain"));
+    blockBrowserAction->setCheckable(true);
+    blockBrowserAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_6));
+    tabGroup->addAction(blockBrowserAction);
+
     connect(overviewAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
     connect(overviewAction, SIGNAL(triggered()), this, SLOT(gotoOverviewPage()));
     connect(receiveCoinsAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
@@ -269,6 +279,8 @@ void BitcoinGUI::createActions()
     connect(historyAction, SIGNAL(triggered()), this, SLOT(gotoHistoryPage()));
     connect(addressBookAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
     connect(addressBookAction, SIGNAL(triggered()), this, SLOT(gotoAddressBookPage()));
+    connect(blockBrowserAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
+    connect(blockBrowserAction, SIGNAL(triggered()), this, SLOT(gotoBlockBrowserPage()));
 
     quitAction = new QAction(tr("E&xit"), this);
     quitAction->setToolTip(tr("Quit application"));
@@ -377,6 +389,7 @@ void BitcoinGUI::createToolBars()
     toolbar->addAction(sendCoinsAction);
     toolbar->addAction(historyAction);
     toolbar->addAction(addressBookAction);
+    toolbar->addAction(blockBrowserAction);
 
     toolbar->addWidget(makeToolBarSpacer());
 
@@ -494,6 +507,9 @@ void BitcoinGUI::createTrayIcon()
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(optionsAction);
     trayIconMenu->addAction(openRPCConsoleAction);
+    trayIconMenu->addSeparator();
+    trayIconMenu->addAction(blockBrowserAction);
+
 #ifndef Q_OS_MAC // This is built-in on Mac
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(quitAction);
@@ -771,6 +787,16 @@ void BitcoinGUI::gotoOverviewPage()
     exportAction->setEnabled(false);
     disconnect(exportAction, SIGNAL(triggered()), 0, 0);
 }
+
+void BitcoinGUI::gotoBlockBrowserPage()
+ {
+     blockBrowserAction->setChecked(true);
+     centralStackedWidget->setCurrentWidget(blockBrowser);
+
+     exportAction->setEnabled(true);
+     disconnect(exportAction, SIGNAL(triggered()), 0, 0);
+     connect(exportAction, SIGNAL(triggered()), blockBrowser, SLOT(exportClicked()));
+ }
 
 void BitcoinGUI::gotoHistoryPage()
 {
