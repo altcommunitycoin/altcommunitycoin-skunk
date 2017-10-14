@@ -53,7 +53,7 @@ public:
         pchMessageStart[1] = 0x12;
         pchMessageStart[2] = 0x22;
         pchMessageStart[3] = 0x14;
-        vAlertPubKey = ParseHex("");
+        vAlertPubKey = ParseHex("04846e117e71c582c37266911049a00a1ac24d685c5a237582428a632ca8b97b6f896a7060eaac778f2e76bbd5de34746d21a515b524202b8faad1a233aaad38d1");
         nDefaultPort = 29855;
         nRPCPort = 28855;
         bnProofOfWorkLimit = CBigNum(~uint256(0) >> 20);
@@ -83,7 +83,11 @@ public:
         //MineGenesis(genesis);
 
         vSeeds.push_back(CDNSSeedData("109.230.231.216", "109.230.231.216"));
-       vSeeds.push_back(CDNSSeedData("109.230.231.221", "109.230.231.221"));
+        vSeeds.push_back(CDNSSeedData("109.230.231.221", "109.230.231.221"));
+        vSeeds.push_back(CDNSSeedData("212.109.218.47", "212.109.218.47"));
+        vSeeds.push_back(CDNSSeedData("zPools.de", "zPools.de"));
+
+
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 23);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 125);
