@@ -25,31 +25,45 @@ Default Port: 29855
 Official Links
 
 Official Website: http://altcoincommunity.co/
+
 Official Forum: https://altcoincommunity.net/
+
 Bounty/Signature Thread Link: https://bitcointalk.org/index.php?topic=2105784.0
+
 Official Twitter: https://twitter.com/AltComCoin
+
 Discord Server: https://discord.gg/8bY2rjX
+
 Whitepaper: http://bit.ly/2fxnRWc
+
 
 --
 
 SkunkHash Miners
 
 CCMiner for SkunkHash nVidia: https://github.com/tpruvot/ccminer/releases
+
 AMD miner: https://github.com/semtexzv/Prospector/releases
+
 
 --
 
 Exchanges
 
 https://yobit.net/en/trade/ALTCOM/BTC
+
 https://stocks.exchange/trade/ALTCOM/BTC
+
 https://coinsmarkets.com/trade-BTC-ALTCOM.htm
+
 
 --
 
 Pools
 http://zpools.de/ 
+
 http://pool.friends-master.net 
+
 https://altcom.coin-miners.info/ 
+
 https://umine.org/ 
