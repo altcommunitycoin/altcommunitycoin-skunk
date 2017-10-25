@@ -1039,7 +1039,7 @@ void ReadConfigFile(map<string, string>& mapSettingsRet,
                    fprintf(ConfFile, "daemon=1\n");
                    fprintf(ConfFile, "maxconnections=500\n");
                    fprintf(ConfFile, "rpcuser=yourusername\n");
-                   fprintf(ConfFile, "rpcpassword=somerandompassword\n";
+                   fprintf(ConfFile, "rpcpassword=somerandompassword\n");
                    fprintf(ConfFile, "port=29855\n");
                    fprintf(ConfFile, "rpcport=28855\n");
                    fprintf(ConfFile, "rpcconnect=127.0.0.1\n");
