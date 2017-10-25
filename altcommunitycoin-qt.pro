@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = altcommunitycoin-qt
-VERSION = 1.1.0.1
+VERSION = 1.1.0.2
 INCLUDEPATH += src src/json src/qt
 QT += network
 DEFINES += ENABLE_WALLET
