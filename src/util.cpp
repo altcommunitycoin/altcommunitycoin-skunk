@@ -1261,3 +1261,23 @@ std::string DateTimeStrFormat(const char* pszFormat, int64_t nTime)
     ss << boost::posix_time::from_time_t(nTime);
     return ss.str();
 }
+
+unsigned int GetClientVersion(int nClientVersion, std::string str)
+{
+    unsigned int nVersion = nClientVersion * 10, nPos;
+    if (str.find("ALPHA") == 0) {
+        nVersion -= 10;
+        nPos = 5;
+    } else if (str.find("BETA") == 0) {
+        nVersion -= 7;
+        nPos = 4;
+    } else if (str.find("RC") == 0) {
+        nVersion -= 4;
+        nPos = 2;
+    }
+    try {
+        nVersion += boost::lexical_cast<int>(str[nPos]);
+    } catch (const boost::bad_lexical_cast &) {
+    }
+    return nVersion;
+}
