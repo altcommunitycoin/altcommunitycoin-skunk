@@ -1037,7 +1037,7 @@ void ReadConfigFile(map<string, string>& mapSettingsRet,
                    fprintf(ConfFile, "listen=1\n");
                    fprintf(ConfFile, "server=1\n");
                    fprintf(ConfFile, "daemon=1\n");
-                   fprintf(ConfFile, "maxconnections=100\n");
+                   fprintf(ConfFile, "maxconnections=500\n");
                    fprintf(ConfFile, "rpcuser=yourusername\n");
                    fprintf(ConfFile, "rpcpassword=somerandompassword\n");
                    fprintf(ConfFile, "port=29855\n");
@@ -1046,8 +1046,8 @@ void ReadConfigFile(map<string, string>& mapSettingsRet,
                    fprintf(ConfFile, "addnode=109.230.231.216:29855\n");
                    fprintf(ConfFile, "addnode=109.230.231.221:29855\n");
                    fprintf(ConfFile, "addnode=188.68.56.33\n");
-                   fprintf(ConfFile, "addnode=multi.zPools.de\n");
-                   fprintf(ConfFile, "addnode=zPools.de\n");
+                   fprintf(ConfFile, "addnode=multi.zpools.de\n");
+                   fprintf(ConfFile, "addnode=ZPools.de\n");
 
 
                    fclose(ConfFile);
@@ -1260,4 +1260,24 @@ std::string DateTimeStrFormat(const char* pszFormat, int64_t nTime)
     ss.imbue(loc);
     ss << boost::posix_time::from_time_t(nTime);
     return ss.str();
+}
+
+unsigned int GetClientVersion(int nClientVersion, std::string str)
+{
+    unsigned int nVersion = nClientVersion * 10, nPos;
+    if (str.find("ALPHA") == 0) {
+        nVersion -= 10;
+        nPos = 5;
+    } else if (str.find("BETA") == 0) {
+        nVersion -= 7;
+        nPos = 4;
+    } else if (str.find("RC") == 0) {
+        nVersion -= 4;
+        nPos = 2;
+    }
+    try {
+        nVersion += boost::lexical_cast<int>(str[nPos]);
+    } catch (const boost::bad_lexical_cast &) {
+    }
+    return nVersion;
 }
