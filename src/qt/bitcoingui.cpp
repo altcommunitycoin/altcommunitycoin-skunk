@@ -263,7 +263,7 @@ void BitcoinGUI::createActions()
     addressBookAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_5));
     tabGroup->addAction(addressBookAction);
 
-    blockBrowserAction = new QAction(QIcon(":/icons/bbrowser"), tr("&Block browser"), this);
+    blockBrowserAction = new QAction(QIcon(":/icons/bbrowser"), tr("&Block Explorer"), this);
     blockBrowserAction->setToolTip(tr("Crawl blocks on the chain"));
     blockBrowserAction->setCheckable(true);
     blockBrowserAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_6));
