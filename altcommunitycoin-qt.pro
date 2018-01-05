@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = altcommunitycoin-qt
-VERSION = 1.1.0.2
+VERSION = 1.1.0.3
 INCLUDEPATH += src src/json src/qt
 QT += network
 DEFINES += ENABLE_WALLET
@@ -200,6 +200,7 @@ HEADERS += src/qt/bitcoingui.h \
     src/qt/trafficgraphwidget.h \
     src/qt/transactiondesc.h \
     src/qt/transactiondescdialog.h \
+    src/qt/updatecheck.h \
     src/qt/bitcoinamountfield.h \
     src/wallet.h \
     src/keystore.h \
@@ -278,6 +279,7 @@ SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/qt/trafficgraphwidget.cpp \
     src/qt/transactiondesc.cpp \
     src/qt/transactiondescdialog.cpp \
+    src/qt/updatecheck.cpp \
     src/qt/bitcoinstrings.cpp \
     src/qt/bitcoinamountfield.cpp \
     src/wallet.cpp \

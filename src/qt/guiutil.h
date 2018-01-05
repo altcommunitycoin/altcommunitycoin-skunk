@@ -4,8 +4,10 @@
 #include <QString>
 #include <QObject>
 #include <QMessageBox>
-
-class SendCoinsRecipient;
+#include <QLabel>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QStackedWidget>
 
 QT_BEGIN_NAMESPACE
 class QFont;
@@ -15,6 +17,8 @@ class QDateTime;
 class QUrl;
 class QAbstractItemView;
 QT_END_NAMESPACE
+
+class SendCoinsRecipient;
 
 /** Utility functions used by the Bitcoin Qt UI.
  */
@@ -117,6 +121,66 @@ namespace GUIUtil
     };
 
     void SetBlackThemeQSS(QApplication& app);
+
+
+    class QCLabel : public QLabel
+    {
+        Q_OBJECT
+
+    public:
+        QCLabel(const QString& text="", QWidget* parent=0);
+        ~QCLabel(){};
+
+    signals:
+        void clicked();
+
+    protected:
+        void mouseReleaseEvent(QMouseEvent* event);
+    };
+
+
+    class QPriceInfo : public QObject
+    {
+        Q_OBJECT
+
+    public:
+        QPriceInfo();
+        ~QPriceInfo(){};
+        void checkPrice();
+        double getPriceInBTC()
+        {
+            return rPriceInBTC;
+        }
+
+        double getPriceInUSD()
+        {
+            return rPriceInUSD;
+        }
+
+    signals:
+        void finished();
+
+    private:
+        QUrl BTCPriceCheckURL;
+        QUrl MagiToUSDPriceCheckURL;
+        double rPriceInBTC;
+        double rPriceInUSD;
+        QNetworkAccessManager mCheckUSDPrice;
+        QNetworkAccessManager mCheckBTCPrice;
+    private slots:
+        void updatePriceInUSD(QNetworkReply* resp);
+        void updatePriceInBTC(QNetworkReply* resp);
+    };
+
+    class QRStackedWidget : public QStackedWidget
+    {
+        Q_OBJECT
+    public:
+        QRStackedWidget(QWidget *parent = 0) : QStackedWidget(parent) {};
+        ~QRStackedWidget(){};
+        void addWidget(QWidget* pWidget);
+        void onCurrentChanged(int index);
+    };
 
 } // namespace GUIUtil
 
