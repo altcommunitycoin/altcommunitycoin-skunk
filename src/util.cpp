@@ -1046,8 +1046,8 @@ void ReadConfigFile(map<string, string>& mapSettingsRet,
                    fprintf(ConfFile, "addnode=109.230.231.216:29855\n");
                    fprintf(ConfFile, "addnode=109.230.231.221:29855\n");
                    fprintf(ConfFile, "addnode=188.68.56.33\n");
-                   fprintf(ConfFile, "addnode=multi.zpools.de\n");
-                   fprintf(ConfFile, "addnode=ZPools.de\n");
+                   fprintf(ConfFile, "addnode=multi.zPools.de\n");
+                   fprintf(ConfFile, "addnode=zPools.de\n");
 
 
                    fclose(ConfFile);
