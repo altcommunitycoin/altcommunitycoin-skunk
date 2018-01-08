@@ -34,6 +34,8 @@ class uint256;
 static const int64_t COIN = 100000000;
 static const int64_t CENT = 1000000;
 
+static const double MINFINITESIMAL = 1.e-30;
+
 #define BEGIN(a)            ((char*)&(a))
 #define END(a)              ((char*)&((&(a))[1]))
 #define UBEGIN(a)           ((unsigned char*)&(a))
@@ -187,6 +189,7 @@ void SetMockTime(int64_t nMockTimeIn);
 std::string FormatFullVersion();
 std::string FormatSubVersion(const std::string& name, int nClientVersion, const std::vector<std::string>& comments);
 void runCommand(std::string strCommand);
+unsigned int GetClientVersion(int nClientVersion, std::string str);
 
 
 
