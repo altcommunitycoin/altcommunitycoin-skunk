@@ -222,7 +222,6 @@ void OverviewPage::setPriceUpdateCheck()
     sizePolicy.setVerticalStretch(0);
 
     QFont font2;
-    font2.setPointSize(BAL_FONT_SIZE);
     font2.setBold(true);
     font2.setWeight(QFont::DemiBold);
     labelPriceInBTC = new GUIUtil::QCLabel("", ui->frameBalance);
