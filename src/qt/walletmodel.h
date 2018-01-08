@@ -67,6 +67,7 @@ public:
     qint64 getStake() const;
     qint64 getUnconfirmedBalance() const;
     qint64 getImmatureBalance() const;
+    qint64 getMintedBalance() const;
     EncryptionStatus getEncryptionStatus() const;
 
     // Check address for validity

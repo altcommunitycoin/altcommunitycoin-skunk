@@ -33,7 +33,7 @@ public:
     void showUpdateLayout(bool fShow);
 
 public slots:
-    void setBalance(qint64 balance, qint64 stake, qint64 unconfirmedBalance, qint64 immatureBalance);
+    void setBalance(qint64 balance, qint64 stake, qint64 unconfirmedBalance, qint64 immatureBalance, qint64 mintedBalance);
     void updateValues();
 
 signals:
@@ -49,6 +49,7 @@ private:
     qint64 currentUnconfirmedBalance;
     qint64 currentImmatureBalance;
     qint64 currentTotalBalance;
+    qint64 currentMintedBalance;
 
     TxViewDelegate *txdelegate;
     TransactionFilterProxy *filter;
