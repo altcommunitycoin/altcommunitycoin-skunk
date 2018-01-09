@@ -9,17 +9,35 @@
 #include "util.h"
 #include "init.h"
 
+#include <QString>
 #include <QDateTime>
 #include <QDoubleValidator>
 #include <QFont>
 #include <QLineEdit>
+#if QT_VERSION >= 0x050000
+#include <QUrlQuery>
+#else
 #include <QUrl>
+#endif
 #include <QTextDocument> // For Qt::escape
 #include <QAbstractItemView>
+#include <QApplication>
 #include <QClipboard>
+#include <QDateTime>
+#include <QDesktopServices>
+#include <QDesktopWidget>
+#include <QDoubleValidator>
 #include <QFileDialog>
 #include <QDesktopServices>
+#include <QFont>
+#include <QLineEdit>
+#include <QSettings>
+#include <QTextDocument> // for Qt::mightBeRichText
 #include <QThread>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QMessageBox>
 
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
@@ -459,6 +477,62 @@ void HelpMessageBox::showOrPrint()
         printToConsole();
 #endif
 }
+
+QCLabel::QCLabel(const QString& text, QWidget* parent)
+:QLabel(parent)
+{
+    setText(text);
+}
+
+void QCLabel::mouseReleaseEvent ( QMouseEvent * event )
+{
+    emit clicked();
+}
+
+QPriceInfo::QPriceInfo()
+{
+    rPriceInBTC = 0.;
+    rPriceInUSD = 0.;
+    // url (temporary) for checking price
+    BTCPriceCheckURL = QUrl("https://api.coinmarketcap.com/v1/ticker/bitcoin/");
+    MagiToUSDPriceCheckURL = QUrl("https://api.coinmarketcap.com/v1/ticker/altcommunity-coin/");
+
+    connect(&mCheckUSDPrice, SIGNAL (finished(QNetworkReply*)), this, SLOT (updatePriceInUSD(QNetworkReply*)));
+    connect(&mCheckBTCPrice, SIGNAL (finished(QNetworkReply*)), this, SLOT (updatePriceInBTC(QNetworkReply*)));
+}
+
+void QPriceInfo::checkPrice()
+{
+    mCheckUSDPrice.get(QNetworkRequest(MagiToUSDPriceCheckURL));
+}
+
+void QPriceInfo::updatePriceInUSD(QNetworkReply* resp)
+{
+    QByteArray bResp = resp->readAll();
+    QJsonDocument jResp = QJsonDocument::fromJson(bResp);
+    QJsonArray jArray = jResp.array();
+    rPriceInUSD = (jArray[0].toObject())["price_usd"].toString().toDouble();
+/*
+    QJsonDocument jTest( jValue.toObject() );
+    QString qstrshow( jTest.toJson()  );
+    QMessageBox::warning(0, "ALTCOM", qstrshow  );
+*/
+    mCheckBTCPrice.get(QNetworkRequest(BTCPriceCheckURL));
+}
+
+void QPriceInfo::updatePriceInBTC(QNetworkReply* resp)
+{
+    QByteArray bResp = resp->readAll();
+    QJsonDocument jResp = QJsonDocument::fromJson(bResp);
+    QJsonObject jObject = jResp.object();
+    QJsonArray jArray = jResp.array();
+    rPriceInBTC = (jArray[0].toObject())["price_usd"].toString().toDouble();
+    if (rPriceInBTC > MINFINITESIMAL) {
+        rPriceInBTC = rPriceInUSD / rPriceInBTC;
+    }
+    emit finished();
+}
+
 
 void SetBlackThemeQSS(QApplication& app)
 {
